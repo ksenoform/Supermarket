@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
  * Created by RSzczygielski on 17.01.16.
  */
 public class ProductTest {
-    private Product productToTest = new Product();
+    private Product productToTest = new ProductImpl();
 
     @Test
     public void shouldReturn0For0AsPriceAndTax() {
@@ -25,16 +25,16 @@ public class ProductTest {
     }
 
     @Test
-    public void shouldReturnElevenNumbersForPriceFrom1To10AndTax10() {
+    public void shouldReturnElevenNumbersForPriceFrom1To10MultiplyBy10AndTax10() {
         BigDecimal tax = BigDecimal.TEN;
         productToTest.setTax(tax);
 
         for (int currentPrice = 1; currentPrice <= 10; currentPrice++) {
-            BigDecimal expectResult = (new BigDecimal(11));
+            BigDecimal expectResult = (new BigDecimal("11.0"));
             expectResult = expectResult.multiply(
                     new BigDecimal(currentPrice));
 
-            BigDecimal price = new BigDecimal(currentPrice);
+            BigDecimal price = new BigDecimal(currentPrice*10);
             productToTest.setNetPrice(price);
 
             BigDecimal result = productToTest.getTotalPrice();
