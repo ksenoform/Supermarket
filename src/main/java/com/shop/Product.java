@@ -2,47 +2,17 @@ package com.shop;
 
 import java.math.BigDecimal;
 
-import static java.math.BigDecimal.*;
-
 /**
  * Created by RSzczygielski on 17.01.16.
  */
-public class Product {
-    private String name;
-    private BigDecimal netPrice;
-    private BigDecimal tax;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public BigDecimal getNetPrice() {
-        return netPrice;
-    }
-
-    public void setNetPrice(BigDecimal netPrice) {
-        this.netPrice = netPrice;
-    }
-
-    public BigDecimal getTax() {
-        return tax;
-    }
-
-    public void setTax(BigDecimal tax) {
-        BigDecimal oneHundred = new BigDecimal("100.0");
-        this.tax = (tax.equals(ZERO))
-                ? ONE
-                : tax.divide(oneHundred);
-    }
-
-    public BigDecimal getTotalPrice() {
-        BigDecimal totalPrice = netPrice.multiply(tax);
-        totalPrice = totalPrice.add(netPrice);
-
-        return totalPrice;
-    }
+public interface Product {
+    public String getId();
+    public void setId(String id);
+    public String getName();
+    public void setName(String name);
+    public BigDecimal getNetPrice();
+    public void setNetPrice(BigDecimal netPrice);
+    public BigDecimal getTax();
+    public void setTax(BigDecimal tax);
+    public BigDecimal getTotalPrice();
 }
