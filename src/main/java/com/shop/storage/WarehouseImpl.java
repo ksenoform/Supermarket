@@ -1,6 +1,6 @@
 package com.shop.storage;
 
-import com.shop.Product;
+import com.shop.wares.Product;
 
 import java.util.ArrayList;
 import java.util.List;

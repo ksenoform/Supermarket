@@ -1,7 +1,7 @@
 package com.shop.storage;
 
-import com.shop.Product;
-import com.shop.ProductImpl;
+import com.shop.wares.Product;
+import com.shop.wares.ProductImpl;
 import org.junit.Before;
 import org.junit.Test;
 
