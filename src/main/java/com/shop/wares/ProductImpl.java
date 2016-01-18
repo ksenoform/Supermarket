@@ -63,4 +63,22 @@ public class ProductImpl implements Product{
 
         return totalPrice;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder productData = new StringBuilder();
+
+        productData.append("Product id: ");
+        productData.append(id);
+        productData.append(", name: ");
+        productData.append(name);
+        productData.append(", net price: ");
+        productData.append(netPrice);
+        productData.append(", tax: ");
+        productData.append(tax);
+        productData.append(", gross price: ");
+        productData.append(getTotalPrice());
+
+        return  productData.toString();
+    }
 }
