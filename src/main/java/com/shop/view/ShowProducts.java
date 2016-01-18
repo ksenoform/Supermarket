@@ -5,10 +5,10 @@ import com.shop.storage.Warehouse;
 /**
  * Created by RSzczygielski on 2016-01-18.
  */
-public class ShowProductsMenu implements Commands {
+public class ShowProducts implements Commands {
     Warehouse warehouse;
 
-    public ShowProductsMenu(Warehouse warehouse) {
+    public ShowProducts(Warehouse warehouse) {
         this.warehouse = warehouse;
     }
 
