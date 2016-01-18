@@ -5,9 +5,6 @@ import com.shop.support.ConsoleReader;
 import com.shop.wares.Product;
 import com.shop.wares.ProductBuilderImpl;
 
-import java.util.Map;
-import java.util.concurrent.locks.Condition;
-
 /**
  * Created by RSzczygielski on 2016-01-18.
  */
@@ -28,16 +25,16 @@ public class AddProducts implements Commands {
 
     private Product createProduct() {
         System.out.println("Product id: ");
-        String productId = ConsoleReader.readDate();
+        String productId = ConsoleReader.readData();
 
         System.out.println("Product name: ");
-        String productName = ConsoleReader.readDate();
+        String productName = ConsoleReader.readData();
 
         System.out.println("Product net price: ");
-        String productNetPrice = ConsoleReader.readDate();
+        String productNetPrice = ConsoleReader.readData();
 
         System.out.println("Product tax: ");
-        String productTax = ConsoleReader.readDate();
+        String productTax = ConsoleReader.readData();
 
         Product product = new ProductBuilderImpl()
                 .setId(productId)
@@ -51,7 +48,7 @@ public class AddProducts implements Commands {
 
     private String getAmountValue() {
         System.out.println("Set quantity of the product: ");
-        String result = ConsoleReader.readDate();
+        String result = ConsoleReader.readData();
 
         return result;
     }
