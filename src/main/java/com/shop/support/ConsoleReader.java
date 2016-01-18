@@ -10,14 +10,15 @@ import java.io.InputStreamReader;
 public class ConsoleReader {
     private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-    public static String readDate() {
-        String dateFromUser = null;
+    public static String readData() {
+        String dataFromUser = null;
+
         try {
-            dateFromUser = reader.readLine();
+            dataFromUser = reader.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return dateFromUser;
+        return dataFromUser;
     }
 }
