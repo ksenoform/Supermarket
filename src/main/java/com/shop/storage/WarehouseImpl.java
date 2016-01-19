@@ -70,7 +70,7 @@ public class WarehouseImpl implements Warehouse {
         Integer oldAmount = productList.get(product);
         Integer newAmount = oldAmount - amount;
 
-        addProductToWarehouse(product, newAmount);
+        productList.put(product, newAmount);
     }
 
     @Override
