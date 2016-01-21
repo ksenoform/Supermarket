@@ -1,5 +1,9 @@
 package com.shop.wares;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 
 import static java.math.BigDecimal.*;
@@ -7,10 +11,17 @@ import static java.math.BigDecimal.*;
 /**
  * Created by RSzczygielski on 17.01.16.
  */
+@Entity
+@Table(name = "PRODUCTS")
 public class ProductImpl implements Product{
+    @Id
+    @Column(name = "ID", nullable = false)
     private String id;
+    @Column(name = "NAME", nullable = false)
     private String name;
+    @Column(name = "NET_PRICE", nullable = false)
     private BigDecimal netPrice;
+    @Column(name = "TAX", nullable = false)
     private BigDecimal tax;
 
     @Override
