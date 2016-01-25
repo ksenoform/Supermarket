@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -8,5 +9,16 @@
     </head>
     <body>
         <h1>${toShow}</h1>
+         <form:form method="POST" commandName="userForm">
+         		<form:errors path="*" cssClass="errorblock" element="div" />
+         		<table>
+         			<tr>
+         				<td colspan="3">
+         				    <input type="submit" value="Submit" name="AllProducts" />
+         				</td>
+         			</tr>
+         		</table>
+         	</form:form>
+
     </body>
 </html>
