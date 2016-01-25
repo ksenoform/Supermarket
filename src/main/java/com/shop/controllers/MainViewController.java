@@ -1,8 +1,8 @@
 package com.shop.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by RSzczygielski on 2016-01-25.
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainViewController {
     @RequestMapping("/")
-    public String ShowMainView(Model model) {
-        model.addAttribute("toShow", "Warehouse view");
+    public ModelAndView ShowMainView() {
+        String message = "<br><div style='text-align:center;'> Warehouse view </div><br><br>";
 
-        return "index";
+        return new ModelAndView("index", "toShow", message);
     }
 }
