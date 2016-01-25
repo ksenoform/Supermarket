@@ -92,4 +92,20 @@ public class ProductImpl implements Product{
 
         return  productData.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ProductImpl product = (ProductImpl) o;
+
+        return id.equals(product.id);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }
