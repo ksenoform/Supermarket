@@ -17,7 +17,7 @@
             </plugin>
         </plugins>
     </build>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>Supermarket</name>
     <url>http://maven.apache.org</url>
@@ -88,6 +88,12 @@
             <version>3.0.0</version>
         </dependency>
 
+        <!-- Tomcat -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-catalina</artifactId>
+            <version>8.0.29</version>
+        </dependency>
 
         <!-- test -->
         <dependency>
