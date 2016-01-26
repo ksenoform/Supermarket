@@ -9,7 +9,7 @@
     </head>
     <body>
         <h1>${toShow}</h1>
-         <form:form method="POST" commandName="userForm">
+         <form:form method="POST" commandName="showProducts">
          		<form:errors path="*" cssClass="errorblock" element="div" />
          		<table>
          			<tr>
