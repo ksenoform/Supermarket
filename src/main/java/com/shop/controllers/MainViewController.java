@@ -23,7 +23,7 @@ public class MainViewController {
     }
 
     @RequestMapping(method = RequestMethod.POST, params = "AllProducts")
-    public String getRequestFromSubmitButtom(ModelMap modelMap) {
+    public String getRequestFromAllProductsButtom(ModelMap modelMap) {
         String message = "<br><div style='text-align:center;'> All product in warehouse </div><br><br>";
         Warehouse warehouse = new WarehouseImpl();
         warehouse.addProductToWarehouse(new ProductBuilderImpl().build());
@@ -32,5 +32,10 @@ public class MainViewController {
         modelMap.addAttribute("products", warehouse.getAllProduct());
 
         return "allProducts/inventory";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, params = "AddProducts")
+    public String getRequestFromAddProductsButtom() {
+        return "redirect:/addProduct/inventory";
     }
 }
