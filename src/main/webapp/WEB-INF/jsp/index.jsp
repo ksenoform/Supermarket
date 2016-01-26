@@ -14,8 +14,11 @@
          		<table>
          			<tr>
          				<td colspan="3">
-         				    <input type="submit" value="Submit" name="AllProducts" />
+         				    <input type="submit" value="All Products" name="AllProducts" />
          				</td>
+         				<td colspan="3">
+                            <input type="submit" value="Add Products" name="AddProducts" />
+                        </td>
          			</tr>
          		</table>
          	</form:form>
