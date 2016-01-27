@@ -36,13 +36,11 @@
         </form:form>
 
         <table>
-            <tr>
-                <td>${product_id}</td>
-                <td>${product_name}</td>
-                <td>${product_netPrice}</td>
-                <td>${product_tax}</td>
-                <td>${product_totalPrice}</td>
-            </tr>
+            ${product_id}
+            ${product_name}
+            ${product_netPrice}
+            ${product_tax}
+            ${product_totalPrice}
         </table>
 
     </body>
