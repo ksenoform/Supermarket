@@ -27,29 +27,29 @@ public class ContributeViewImpl implements ContributeView {
         modelMap.addAttribute("productForm", new ProductImpl());
 
         modelMap.addAttribute("product_id",
-                buildRowWirhProductDisplayedOnPage("ID: ",
+                buildRowWithProductDisplayedOnPage("ID: ",
                         product.getId()));
 
         modelMap.addAttribute("product_name",
-                buildRowWirhProductDisplayedOnPage("Name: ",
+                buildRowWithProductDisplayedOnPage("Name: ",
                         product.getName()));
 
         modelMap.addAttribute("product_netPrice",
-                buildRowWirhProductDisplayedOnPage("Net price: ",
+                buildRowWithProductDisplayedOnPage("Net price: ",
                         product.getNetPrice().toString()));
 
         modelMap.addAttribute("product_tax",
-                buildRowWirhProductDisplayedOnPage("Tax: ",
+                buildRowWithProductDisplayedOnPage("Tax: ",
                         product.getTax().toString()));
 
         modelMap.addAttribute("product_totalPrice",
-                buildRowWirhProductDisplayedOnPage("Total Price: ",
+                buildRowWithProductDisplayedOnPage("Total Price: ",
                         product.getTotalPrice().toString()));
 
         return "addProduct/contribute";
     }
 
-    private String buildRowWirhProductDisplayedOnPage(String name, String dataToDisplay) {
+    private String buildRowWithProductDisplayedOnPage(String name, String dataToDisplay) {
         String prefix = "<tr><td><h4>";
         String middle = "</h4></td><td>";
         String suffix = "</td></tr>";
