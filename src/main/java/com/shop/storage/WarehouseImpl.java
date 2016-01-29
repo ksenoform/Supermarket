@@ -3,7 +3,6 @@ package com.shop.storage;
 import com.shop.wares.Product;
 import com.shop.wares.ProductBuilderImpl;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,8 +14,11 @@ public class WarehouseImpl implements Warehouse {
     private Map<Product, Integer> productList = new HashMap<>();
 
     @Override
-    public Map<Product, Integer> getAllProduct() {
-        return productList.isEmpty() ? Collections.EMPTY_MAP : productList;
+    public Map<Product, Integer> getAllProduct()
+    {
+        return productList.isEmpty()
+                ? Collections.EMPTY_MAP
+                : productList;
     }
 
     @Override
@@ -97,5 +99,4 @@ public class WarehouseImpl implements Warehouse {
 
         return dataWitchAmount.toString();
     }
-
 }

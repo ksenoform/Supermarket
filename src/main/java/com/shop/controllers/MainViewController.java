@@ -1,10 +1,6 @@
 package com.shop.controllers;
 
-import com.shop.storage.Warehouse;
-import com.shop.storage.WarehouseImpl;
-import com.shop.wares.ProductBuilderImpl;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;

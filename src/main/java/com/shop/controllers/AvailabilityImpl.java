@@ -1,7 +1,6 @@
 package com.shop.controllers;
 
 import com.shop.storage.Warehouse;
-import com.shop.storage.WarehouseImpl;
 import com.shop.wares.ProductBuilderImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,6 +36,4 @@ public class AvailabilityImpl implements Availability {
 
         return "allProducts/inventory";
     }
-
-
 }
