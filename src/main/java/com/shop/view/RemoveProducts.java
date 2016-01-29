@@ -3,7 +3,6 @@ package com.shop.view;
 import com.shop.storage.Warehouse;
 import com.shop.support.ConsoleReader;
 import com.shop.wares.Product;
-import com.shop.wares.ProductBuilderImpl;
 
 /**
  * Created by RSzczygielski on 2016-01-19.

@@ -16,7 +16,6 @@ public class ProductBuilderImpl implements ProductBuilder {
                 new BigDecimal(0));
         product.setTax(
                 new BigDecimal(0));
-
     }
 
     public ProductBuilder setId(String id) {

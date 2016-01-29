@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("addProduct/")
 public class ContributeViewImpl implements ContributeView {
-
     @Override
     @RequestMapping(value = "inventory", method = RequestMethod.GET)
      public ModelAndView showProductForm() {
@@ -25,7 +24,12 @@ public class ContributeViewImpl implements ContributeView {
     @RequestMapping(value = "contribute", method = RequestMethod.POST)
     public String addProduct(@ModelAttribute ProductImpl product, ModelMap modelMap) {
         modelMap.addAttribute("productForm", new ProductImpl());
+        prepareViewWithAddingProduct(product, modelMap);
 
+        return "addProduct/contribute";
+    }
+
+    private void prepareViewWithAddingProduct(ProductImpl product, ModelMap modelMap) {
         modelMap.addAttribute("product_id",
                 buildRowWithProductDisplayedOnPage("ID: ",
                         product.getId()));
@@ -45,8 +49,6 @@ public class ContributeViewImpl implements ContributeView {
         modelMap.addAttribute("product_totalPrice",
                 buildRowWithProductDisplayedOnPage("Total Price: ",
                         product.getTotalPrice().toString()));
-
-        return "addProduct/contribute";
     }
 
     private String buildRowWithProductDisplayedOnPage(String name, String dataToDisplay) {

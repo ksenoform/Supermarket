@@ -101,7 +101,6 @@ public class ProductImpl implements Product{
         ProductImpl product = (ProductImpl) o;
 
         return id.equals(product.id);
-
     }
 
     @Override
