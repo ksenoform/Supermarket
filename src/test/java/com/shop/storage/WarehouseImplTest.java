@@ -114,7 +114,7 @@ public class WarehouseImplTest {
 
         subtractOneValueFromList(warehouse.getAllProduct());
 
-        assertTestForListAfterSubtractFewItems(warehouse.getAllProduct(), toCompere);
+        assertTestForListAfterSubtractOneItems(warehouse.getAllProduct(), toCompere);
     }
 
     @Test
