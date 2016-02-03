@@ -1,6 +1,8 @@
 package com.shop.controllers;
 
+import com.shop.support.DatabaseConnector;
 import com.shop.wares.ProductImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,6 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("addProduct/")
 public class ContributeViewImpl implements ContributeView {
+    @Autowired
+    DatabaseConnector databaseConnector;
+
     @Override
     @RequestMapping(value = "inventory", method = RequestMethod.GET)
      public ModelAndView showProductForm() {
@@ -24,6 +29,7 @@ public class ContributeViewImpl implements ContributeView {
     @RequestMapping(value = "contribute", method = RequestMethod.POST)
     public String addProduct(@ModelAttribute ProductImpl product, ModelMap modelMap) {
         modelMap.addAttribute("productForm", new ProductImpl());
+        databaseConnector.writeToDatabase(product);
         prepareViewWithAddingProduct(product, modelMap);
 
         return "addProduct/contribute";
