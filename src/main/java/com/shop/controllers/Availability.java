@@ -7,4 +7,5 @@ import org.springframework.ui.ModelMap;
  */
 public interface Availability {
     public String getRequestFromAllProductsButton(ModelMap modelMap);
+    public String getRequestForMainView();
 }

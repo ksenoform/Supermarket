@@ -30,4 +30,10 @@ public class AvailabilityImpl implements Availability {
 
         return "allProducts/inventory";
     }
+
+    @Override
+    @RequestMapping(value = "inventory", method = RequestMethod.POST, params = "MainView")
+    public String getRequestForMainView() {
+        return "redirect:/";
+    }
 }

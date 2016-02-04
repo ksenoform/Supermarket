@@ -9,6 +9,18 @@
     </head>
     <body>
         <h1>${showInventory}</h1>
+
+        <form:form method="POST" commandName="mainView">
+            <form:errors path="*" cssClass="errorblock" element="div" />
+            <table>
+                <tr>
+                    <td colspan="3">
+                        <input type="submit" value="Main View" name="MainView" />
+                    </td>
+                </tr>
+            </table>
+         </form:form>
+
         <section class="container">
             <div class="row">
                 <c:forEach items="${products}" var="product">

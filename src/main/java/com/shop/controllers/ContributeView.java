@@ -10,4 +10,5 @@ import org.springframework.web.servlet.ModelAndView;
 public interface ContributeView {
     public ModelAndView showProductForm();
     public String addProduct(ProductImpl product, ModelMap modelMap);
+    public String getRequestForMainView();
 }
