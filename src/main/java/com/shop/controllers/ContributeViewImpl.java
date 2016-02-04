@@ -26,13 +26,19 @@ public class ContributeViewImpl implements ContributeView {
     }
 
     @Override
-    @RequestMapping(value = "contribute", method = RequestMethod.POST)
+    @RequestMapping(value = "contribute", method = RequestMethod.POST, params = "Submit")
     public String addProduct(@ModelAttribute ProductImpl product, ModelMap modelMap) {
         modelMap.addAttribute("productForm", new ProductImpl());
         databaseConnector.writeToDatabase(product);
         prepareViewWithAddingProduct(product, modelMap);
 
         return "addProduct/contribute";
+    }
+
+    @Override
+    @RequestMapping(value = {"contribute", "inventory"}, method = RequestMethod.POST, params = "MainView")
+    public String getRequestForMainView() {
+        return "redirect:/";
     }
 
     private void prepareViewWithAddingProduct(ProductImpl product, ModelMap modelMap) {

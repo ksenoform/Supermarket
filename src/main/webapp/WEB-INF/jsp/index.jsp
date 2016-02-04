@@ -10,18 +10,17 @@
     <body>
         <h1>${toShow}</h1>
          <form:form method="POST" commandName="showProducts">
-         		<form:errors path="*" cssClass="errorblock" element="div" />
-         		<table>
-         			<tr>
-         				<td colspan="3">
-         				    <input type="submit" value="All Products" name="AllProducts" />
-         				</td>
-         				<td colspan="3">
-                            <input type="submit" value="Add Products" name="AddProducts" />
-                        </td>
-         			</tr>
-         		</table>
-         	</form:form>
-
+            <form:errors path="*" cssClass="errorblock" element="div" />
+            <table>
+                <tr>
+                    <td colspan="3">
+                        <input type="submit" value="All Products" name="AllProducts" />
+                    </td>
+                    <td colspan="3">
+                        <input type="submit" value="Add Products" name="AddProducts" />
+                    </td>
+                </tr>
+            </table>
+         </form:form>
     </body>
 </html>

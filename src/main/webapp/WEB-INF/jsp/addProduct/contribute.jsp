@@ -9,6 +9,18 @@
     </head>
     <body>
         <h1>${showContribute}</h1>
+
+        <form:form method="POST" commandName="mainView">
+            <form:errors path="*" cssClass="errorblock" element="div" />
+            <table>
+                <tr>
+                    <td colspan="3">
+                        <input type="submit" value="Main View" name="MainView" />
+                    </td>
+                </tr>
+            </table>
+         </form:form>
+
         <form:form method="POST" commandName="productForm" action="../addProduct/contribute">
            <table>
             <tr>
@@ -29,7 +41,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <input type="submit" value="Submit"/>
+                    <input type="submit" value="Submit" name="Submit"/>
                 </td>
             </tr>
         </table>
