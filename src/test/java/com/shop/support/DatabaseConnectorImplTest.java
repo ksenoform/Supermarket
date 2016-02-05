@@ -14,10 +14,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -46,5 +43,26 @@ public class DatabaseConnectorImplTest {
         Map<Product, Integer> result = databaseConnector.readFromDatabase();
 
         assertEquals(new Integer(1), result.get(product));
+    }
+
+    @Test
+    public void shouldReturnEmptyMapIfListOfProductIsEmpty() throws Exception {
+        Mockito.when(sessionFactory.getCurrentSession()).thenReturn(session);
+        Mockito.when(session.createQuery(Mockito.anyString())).thenReturn(query);
+        Mockito.when(query.list()).thenReturn(Collections.emptyList());
+
+        Map<Product, Integer> result = databaseConnector.readFromDatabase();
+
+        assertEquals(Collections.emptyMap(), result);
+    }
+
+    @Test
+    public void verifyIfMethodResponsibilityForWritingToDatabaseIsCold() {
+        DatabaseConnector databaseConnectorSpy = Mockito.spy(databaseConnector);
+        Mockito.doNothing().when(databaseConnectorSpy).writeToDatabase(product);
+
+        databaseConnectorSpy.writeToDatabase(product);
+
+        Mockito.verify(databaseConnectorSpy, Mockito.atLeastOnce()).writeToDatabase(product);
     }
 }
