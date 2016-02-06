@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -9,6 +10,7 @@
     </head>
     <body>
         <h1>${toShow}</h1>
+        <p><spring:message code="mainview.warehouse.name" /></p>
          <form:form method="POST" commandName="showProducts">
             <form:errors path="*" cssClass="errorblock" element="div" />
             <table>
