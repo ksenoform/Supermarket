@@ -27,7 +27,7 @@ public class SpringBeanConfig {
     @Bean
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource bundleMessageSource = new ResourceBundleMessageSource();
-        bundleMessageSource.setBasename("static");
+        bundleMessageSource.setBasename("messages/static");
 
         return bundleMessageSource;
     }
