@@ -7,13 +7,17 @@ import com.shop.wares.ProductBuilderImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * Created by RSzczygielski on 2016-01-19.
  */
 @Configuration
 public class SpringBeanConfig {
-
     @Bean
     public Warehouse warehouse() {
         return new WarehouseImpl();
@@ -27,8 +31,16 @@ public class SpringBeanConfig {
     @Bean
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource bundleMessageSource = new ResourceBundleMessageSource();
-        bundleMessageSource.setBasename("messages/static");
+        String[] filesWithMessages = {"messages/static", "messages/validator"};
+        bundleMessageSource.setBasenames(filesWithMessages);
 
         return bundleMessageSource;
+    }
+
+    @Bean
+    public LocalValidatorFactoryBean getValidator() {
+        LocalValidatorFactoryBean lvfb = new LocalValidatorFactoryBean();
+        lvfb.setValidationMessageSource(messageSource());
+        return lvfb;
     }
 }

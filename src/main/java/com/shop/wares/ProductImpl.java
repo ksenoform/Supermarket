@@ -1,12 +1,16 @@
 package com.shop.wares;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
 
-import static java.math.BigDecimal.*;
+import static java.math.BigDecimal.ONE;
+import static java.math.BigDecimal.ZERO;
 
 /**
  * Created by RSzczygielski on 17.01.16.
@@ -16,8 +20,10 @@ import static java.math.BigDecimal.*;
 public class ProductImpl implements Product{
     @Id
     @Column(name = "ID", nullable = false)
+    @Pattern(regexp = "\\D{2}\\d+")
     private String id;
     @Column(name = "NAME", nullable = false)
+    @NotEmpty
     private String name;
     @Column(name = "NET_PRICE", nullable = false)
     private BigDecimal netPrice;

@@ -1,14 +1,19 @@
 package com.shop.controllers;
 
 import com.shop.support.DatabaseConnector;
+import com.shop.wares.Product;
 import com.shop.wares.ProductImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 /**
  * Created by RSzczygielski on 2016-01-26.
@@ -27,10 +32,16 @@ public class ContributeViewImpl implements ContributeView {
 
     @Override
     @RequestMapping(value = "contribute", method = RequestMethod.POST, params = "Submit")
-    public String addProduct(@ModelAttribute ProductImpl product, ModelMap modelMap) {
-        modelMap.addAttribute("productForm", new ProductImpl());
+    public String addProduct(@ModelAttribute("productForm") @Validated ProductImpl product,
+                             BindingResult bindingResult,
+                             ModelMap modelMap) {
+        if (bindingResult.hasErrors()) {
+            return "addProduct/contribute";
+        }
+
         databaseConnector.writeToDatabase(product);
         prepareViewWithAddingProduct(product, modelMap);
+        modelMap.addAttribute("productForm", new ProductImpl());
 
         return "addProduct/contribute";
     }
@@ -41,7 +52,7 @@ public class ContributeViewImpl implements ContributeView {
         return "redirect:/";
     }
 
-    private void prepareViewWithAddingProduct(ProductImpl product, ModelMap modelMap) {
+    private void prepareViewWithAddingProduct(Product product, ModelMap modelMap) {
         modelMap.addAttribute("product_id",
                 buildRowWithProductDisplayedOnPage("ID: ",
                         product.getId()));

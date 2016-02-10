@@ -2,6 +2,7 @@ package com.shop.controllers;
 
 import com.shop.wares.ProductImpl;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -9,6 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
  */
 public interface ContributeView {
     public ModelAndView showProductForm();
-    public String addProduct(ProductImpl product, ModelMap modelMap);
+    public String addProduct(ProductImpl product, BindingResult bindingResult, ModelMap modelMap);
     public String getRequestForMainView();
 }
