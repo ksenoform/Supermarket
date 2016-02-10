@@ -1,6 +1,7 @@
 package com.shop.controllers;
 
 import com.shop.support.DatabaseConnector;
+import com.shop.support.ProductValidator;
 import com.shop.wares.Product;
 import com.shop.wares.ProductImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,9 @@ import javax.validation.Valid;
 @RequestMapping("addProduct/")
 public class ContributeViewImpl implements ContributeView {
     @Autowired
-    DatabaseConnector databaseConnector;
+    private DatabaseConnector databaseConnector;
+    @Autowired
+    private ProductValidator productValidator;
 
     @Override
     @RequestMapping(value = "inventory", method = RequestMethod.GET)
@@ -35,6 +38,8 @@ public class ContributeViewImpl implements ContributeView {
     public String addProduct(@ModelAttribute("productForm") @Validated ProductImpl product,
                              BindingResult bindingResult,
                              ModelMap modelMap) {
+        productValidator.validate(product, bindingResult);
+
         if (bindingResult.hasErrors()) {
             return "addProduct/contribute";
         }

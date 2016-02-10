@@ -20,10 +20,8 @@ import static java.math.BigDecimal.ZERO;
 public class ProductImpl implements Product{
     @Id
     @Column(name = "ID", nullable = false)
-    @Pattern(regexp = "\\D{2}\\d+")
     private String id;
     @Column(name = "NAME", nullable = false)
-    @NotEmpty
     private String name;
     @Column(name = "NET_PRICE", nullable = false)
     private BigDecimal netPrice;
