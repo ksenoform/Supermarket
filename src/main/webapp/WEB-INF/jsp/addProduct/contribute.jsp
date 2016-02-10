@@ -11,40 +11,34 @@
         <h1>${showContribute}</h1>
 
         <form:form method="POST" commandName="mainView">
-            <form:errors path="*" cssClass="errorblock" element="div" />
-            <table>
-                <tr>
-                    <td colspan="3">
-                        <input type="submit" value="Main View" name="MainView" />
-                    </td>
-                </tr>
-            </table>
+            <input type="submit" value="Main View" name="MainView" />
          </form:form>
 
         <form:form method="POST" commandName="productForm" action="../addProduct/contribute">
-           <table>
-            <tr>
-                <td><form:label path="id">Id</form:label></td>
-                <td><form:input path="id" /></td>
-            </tr>
-            <tr>
-                <td><form:label path="name">Name</form:label></td>
-                <td><form:input path="name" /></td>
-            </tr>
-            <tr>
-                <td><form:label path="netPrice">Net Price</form:label></td>
-                <td><form:input path="netPrice" /></td>
-            </tr>
-            <tr>
-                <td><form:label path="tax">Tax</form:label></td>
-                <td><form:input path="tax" /></td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <input type="submit" value="Submit" name="Submit"/>
-                </td>
-            </tr>
+        <table>
+        <tr>
+            <td><label for="id">Id: </label></td>
+            <td><form:input path="id" id="id"/></td>
+            <td><form:errors path="id" cssclass="error"/></td>
+        </tr>
+        <tr>
+            <td><label for="name">name: </label></td>
+            <td><form:input path="name" id="name"/></td>
+            <td><form:errors path="name" cssclass="error"/></td>
+        </tr>
+        <tr>
+            <td><label for="netPrice">net Price: </label></td>
+            <td><form:input path="netPrice" id="netPrice"/></td>
+            <td><form:errors path="netPrice" cssclass="error"/></td>
+        </tr>
+        <tr>
+            <td><label for="tax">tax: </label></td>
+            <td><form:input path="tax" id="tax"/></td>
+            <td><form:errors path="tax" cssclass="error"/></td>
+        </tr>
         </table>
+
+        <input type="submit" value="Submit" name="Submit"/>
         </form:form>
 
         <table>
