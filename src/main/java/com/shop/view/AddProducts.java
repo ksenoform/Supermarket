@@ -9,7 +9,7 @@ import com.shop.wares.ProductBuilderImpl;
  * Created by RSzczygielski on 2016-01-18.
  */
 public class AddProducts implements Commands {
-    Warehouse warehouse;
+    private Warehouse warehouse;
 
     public AddProducts(Warehouse warehouse) {
         this.warehouse = warehouse;

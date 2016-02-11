@@ -34,7 +34,9 @@ public class ContributeViewImpl implements ContributeView {
     }
 
     @Override
-    @RequestMapping(value = "contribute", method = RequestMethod.POST, params = "Submit")
+    @RequestMapping(value = "contribute",
+            method = RequestMethod.POST,
+            params = "Submit")
     public String addProduct(@ModelAttribute("productForm") @Validated ProductImpl product,
                              BindingResult bindingResult,
                              ModelMap modelMap) {
@@ -52,7 +54,9 @@ public class ContributeViewImpl implements ContributeView {
     }
 
     @Override
-    @RequestMapping(value = {"contribute", "inventory"}, method = RequestMethod.POST, params = "MainView")
+    @RequestMapping(value = {"contribute", "inventory"},
+            method = RequestMethod.POST,
+            params = "MainView")
     public String getRequestForMainView() {
         return "redirect:/";
     }
