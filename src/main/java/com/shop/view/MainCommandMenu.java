@@ -8,7 +8,7 @@ import java.util.Map;
 public class MainCommandMenu extends BaseManager {
     @Override
     public void showCommandNumberAndDescriptor() {
-        for (Map.Entry<Integer, String> integerStringEntry : super.getCommendDescriptons().entrySet()) {
+        for (Map.Entry<Integer, String> integerStringEntry : super.getCommandDescriptions().entrySet()) {
             System.out.println(integerStringEntry.getKey()
                     + ". "
                     + integerStringEntry.getValue());

@@ -19,7 +19,7 @@ import java.util.Map;
 @Transactional
 public class DatabaseConnectorImpl implements DatabaseConnector{
     @Autowired
-    SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     @Override
     public void writeToDatabase(Product product) {

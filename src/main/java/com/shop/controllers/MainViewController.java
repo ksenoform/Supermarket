@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainViewController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView showMainView() {
-        String message = "<br><div style='text-align:center;'> Warehouse view </div><br><br>";
+        String message = "<br><div style='text-align:center'> Warehouse view </div><br><br>";
 
         return new ModelAndView("index", "toShow", message);
     }

@@ -29,7 +29,7 @@ public abstract class BaseManager {
         command.execute();
     }
 
-    public Map<Integer, String> getCommendDescriptons() {
+    public Map<Integer, String> getCommandDescriptions() {
         return numbersAndDescriptorOfCommands;
     }
 }

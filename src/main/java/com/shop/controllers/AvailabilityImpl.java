@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/allProducts")
 public class AvailabilityImpl implements Availability {
     @Autowired
-    DatabaseConnector databaseConnector;
+    private DatabaseConnector databaseConnector;
 
     @Override
     @RequestMapping(value = "inventory", method = RequestMethod.GET)

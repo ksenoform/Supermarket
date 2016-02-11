@@ -8,7 +8,7 @@ import com.shop.wares.Product;
  * Created by RSzczygielski on 2016-01-19.
  */
 public class RemoveProducts implements Commands {
-    Warehouse warehouse;
+    private Warehouse warehouse;
 
     public RemoveProducts(Warehouse warehouse) {
         this.warehouse = warehouse;
