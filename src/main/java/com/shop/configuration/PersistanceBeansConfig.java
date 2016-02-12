@@ -1,4 +1,4 @@
-package com.shop.support;
+package com.shop.configuration;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.hibernate.SessionFactory;
