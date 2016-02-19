@@ -24,11 +24,11 @@
         <section class="container">
             <div class="row">
                 <c:forEach items="${products}" var="product">
-                    <h3>ID: ${product.key.id}</h3>
-                    <p>Name: ${product.key.name}</p>
-                    <p>Net Price: ${product.key.netPrice}</p>
-                    <p>Tax: ${product.key.tax}</p>
-                    <p>On Stock: ${product.value}</p>
+                    <h3>ID: ${product.id}</h3>
+                    <p>Name: ${product.name}</p>
+                    <p>Net Price: ${product.netPrice}</p>
+                    <p>Tax: ${product.tax}</p>
+                    <p>On Stock: ${product.items}</p>
                 </c:forEach>
             </div>
         </section>

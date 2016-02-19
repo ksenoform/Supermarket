@@ -28,32 +28,9 @@ public class DatabaseConnectorImpl implements DatabaseConnector{
 
     @Override
     @SuppressWarnings("unchecked")
-    public Map<Product, Integer> readFromDatabase() {
+    public List<Product> readFromDatabase() {
         Session session = sessionFactory.getCurrentSession();
-        List<Product> allProduct = session.createQuery("from ProductImpl").list();
 
-        Map<Product, Integer> result = addAmountOfProduct(allProduct);
-
-        return result;
+        return session.createQuery("from ProductImpl").list();
     }
-
-    private Map<Product, Integer> addAmountOfProduct(List<Product> allProduct) {
-        if (allProduct.isEmpty()) {
-            return Collections.emptyMap();
-        }
-
-        Map<Product, Integer> toReturnWithAmount = new HashMap<Product, Integer>();
-
-        for (Product product : allProduct) {
-            Integer amount = getAmountFromDataBase(product);
-            toReturnWithAmount.put(product, amount);
-        }
-
-        return toReturnWithAmount;
-    }
-
-    private Integer getAmountFromDataBase(Product product) {
-        return 1;
-    }
-
 }
