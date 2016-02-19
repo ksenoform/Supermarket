@@ -15,4 +15,6 @@ public interface Product {
     public BigDecimal getTax();
     public void setTax(BigDecimal tax);
     public BigDecimal getTotalPrice();
+    public void setItems(Integer items);
+    public Integer getItems();
 }

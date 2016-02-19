@@ -7,8 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
@@ -18,7 +18,7 @@ import static junit.framework.TestCase.assertTrue;
  */
 public class WarehouseImplTest {
     private Warehouse warehouse = new WarehouseImpl();
-    private Map<Product, String> testProductsList = new HashMap<>();
+    private List<Product> testProductsList = new ArrayList<>();
     private String[] dataForProductsId = {"id11", "id22", "id33"};
     private String[] dataForProductsName = {"iPhone", "GalaxyS", "3310i"};
     private String[] dataForProductsPrice = {"200", "300", "11"};
@@ -31,17 +31,15 @@ public class WarehouseImplTest {
     public void setup() {
         prepareTestList();
 
-        for (Map.Entry<Product, String> productStringEntry : testProductsList.entrySet()) {
-            warehouse.addProductToWarehouse(
-                    productStringEntry.getKey(),
-                    productStringEntry.getValue());
+        for (Product product : testProductsList) {
+            warehouse.pubNewProductToWarehouse(product);
         }
     }
 
     @Test
-    public void shouldReturnEmptyMapWhenProductListIsEmpty() {
+    public void shouldReturnEmptyListWhenProductListIsEmpty() {
         Warehouse warehouseWithEmptyList = new WarehouseImpl();
-        Map<Product, Integer> toCheck = warehouseWithEmptyList.getAllProduct();
+        List<Product> toCheck = warehouseWithEmptyList.getAllProduct();
 
         assertTrue(toCheck.isEmpty());
     }
@@ -49,7 +47,7 @@ public class WarehouseImplTest {
     @Test
     public void shouldReturnListWithProductInProductListInTest() throws Exception {
         int numbersOfProducts = testProductsList.size();
-        Map<Product, Integer> listFormMethod = warehouse.getAllProduct();
+        List<Product> listFormMethod = warehouse.getAllProduct();
 
         assertEquals(numbersOfProducts, listFormMethod.size());
     }
@@ -92,7 +90,10 @@ public class WarehouseImplTest {
 
     @Test
     public void shouldSubtractIntegerValueItemsOfProductForAllProducts() {
-        Map<Product, Integer> toCompere = new HashMap<>(warehouse.getAllProduct());
+        List<Product> toCompere = new ArrayList<>();
+        for (Product p: warehouse.getAllProduct()) {
+            toCompere.add(copyProduct(p));
+        }
 
         subtractIntegerValueFromList(warehouse.getAllProduct());
 
@@ -101,7 +102,10 @@ public class WarehouseImplTest {
 
     @Test
     public void shouldSubtractStringValueItemsOfProductForAllProducts() {
-        Map<Product, Integer> toCompere = new HashMap<>(warehouse.getAllProduct());
+        List<Product> toCompere = new ArrayList<>();
+        for (Product p: warehouse.getAllProduct()) {
+            toCompere.add(copyProduct(p));
+        }
 
         subtractStringValueFromList(warehouse.getAllProduct());
 
@@ -109,17 +113,11 @@ public class WarehouseImplTest {
     }
 
     @Test
-    public void shouldSubtractOneItemsOfProductForAllProducts() {
-        Map<Product, Integer> toCompere = new HashMap<>(warehouse.getAllProduct());
-
-        subtractOneValueFromList(warehouse.getAllProduct());
-
-        assertTestForListAfterSubtractOneItems(warehouse.getAllProduct(), toCompere);
-    }
-
-    @Test
     public void shouldAddValueItemsOfProductForAllProducts() {
-        Map<Product, Integer> toCompere = new HashMap<>(warehouse.getAllProduct());
+        List<Product> toCompere = new ArrayList<>();
+        for (Product p: warehouse.getAllProduct()) {
+            toCompere.add(copyProduct(p));
+        }
 
         changeValueOfItemsInWarehouse(warehouse.getAllProduct());
 
@@ -129,11 +127,11 @@ public class WarehouseImplTest {
     @Test
     public void shouldAddProductWithoutAmountInStock() {
         Product addedProduct = addProductToInventory();
-        Map<Product, Integer> toCheck = warehouse.getAllProduct();
+        List<Product> toCheck = warehouse.getAllProduct();
         Integer expectAmount = 0;
-        Integer amountOfAddedProduct = toCheck.get(addedProduct);
+        Integer index = toCheck.indexOf(addedProduct);
+        Integer amountOfAddedProduct = toCheck.get(index).getItems();
 
-        assertTrue(toCheck.containsKey(addedProduct));
         assertEquals(expectAmount, amountOfAddedProduct);
     }
 
@@ -149,6 +147,18 @@ public class WarehouseImplTest {
         }
     }
 
+    private Product copyProduct(Product p) {
+        Product copy = new ProductBuilderImpl()
+                .setId(p.getId())
+                .setItems(p.getItems())
+                .setName(p.getName())
+                .setNetPrice(p.getNetPrice())
+                .setTax(p.getTax())
+                .build();
+
+        return copy;
+    }
+
     private Product addProductToInventory() {
         Product product = new ProductBuilderImpl()
                 .setId("new1")
@@ -157,60 +167,45 @@ public class WarehouseImplTest {
                 .setTax("0")
                 .build();
 
-        warehouse.addProductToWarehouse(product);
+        warehouse.pubNewProductToWarehouse(product);
 
         return product;
     }
 
-    private void assertTestForListAfterChangeValue(Map<Product, Integer> allProduct, Map<Product, Integer> toCompere) {
-        for (Map.Entry<Product, Integer> productIntegerEntry : toCompere.entrySet()) {
-            Product product = productIntegerEntry.getKey();
-            Integer expectedValue = toCompere.get(product) + subtractAndAddValue;
+    private void assertTestForListAfterChangeValue(List<Product> allProduct, List<Product> toCompere) {
+        for (Product product : allProduct) {
+            Integer index = toCompere.indexOf(product);
+            Integer expectedValue = toCompere.get(index).getItems() + subtractAndAddValue;
 
-            assertEquals(expectedValue, allProduct.get(product));
+            assertEquals(expectedValue, allProduct.get(index).getItems());
         }
     }
 
-    private void changeValueOfItemsInWarehouse(Map<Product, Integer> allProduct) {
-        for (Product product : allProduct.keySet()) {
+    private void changeValueOfItemsInWarehouse(List<Product> allProduct) {
+        for (Product product : allProduct) {
             warehouse.addProductToWarehouse(product, subtractAndAddValue);
         }
     }
 
-    private void assertTestForListAfterSubtractFewItems(Map<Product, Integer> allProduct, Map<Product, Integer> toCompere) {
-        for (Map.Entry<Product, Integer> productIntegerEntry : allProduct.entrySet()) {
-            Product product = productIntegerEntry.getKey();
-            Integer expectedValue = toCompere.get(product) - subtractAndAddValue;
+    private void assertTestForListAfterSubtractFewItems(List<Product> allProduct, List<Product> toCompere) {
+        for (Product product : allProduct) {
+            Integer index = toCompere.indexOf(product);
+            Integer expectedValue = toCompere.get(index).getItems() - subtractAndAddValue;
 
-            assertEquals(expectedValue, productIntegerEntry.getValue());
+            assertEquals(expectedValue, product.getItems());
         }
     }
 
-    private void assertTestForListAfterSubtractOneItems(Map<Product, Integer> allProduct, Map<Product, Integer> toCompere) {
-        for (Map.Entry<Product, Integer> productIntegerEntry : allProduct.entrySet()) {
-            Product product = productIntegerEntry.getKey();
-            Integer expectedValue = toCompere.get(product) - 1;
-
-            assertEquals(expectedValue, productIntegerEntry.getValue());
-        }
-    }
-
-    private void subtractIntegerValueFromList(Map<Product, Integer> subtractList) {
-        for (Product product : subtractList.keySet()) {
+    private void subtractIntegerValueFromList(List<Product> subtractList) {
+        for (Product product : subtractList) {
             warehouse.subtractProductFromWarehouse(product, subtractAndAddValue);
         }
     }
 
-    private void subtractStringValueFromList(Map<Product, Integer> subtractList) {
-        for (Product product : subtractList.keySet()) {
+    private void subtractStringValueFromList(List<Product> subtractList) {
+        for (Product product : subtractList) {
             warehouse.subtractProductFromWarehouse(product,
-                    subtractAndAddValue.toString());
-        }
-    }
-
-    private void subtractOneValueFromList(Map<Product, Integer> subtractList) {
-        for (Product product : subtractList.keySet()) {
-            warehouse.subtractProductFromWarehouse(product);
+                    subtractAndAddValue);
         }
     }
 
@@ -228,8 +223,10 @@ public class WarehouseImplTest {
             product.setTax(
                     new BigDecimal(
                             dataForProductsTax[i]));
+            product.setItems(
+                    new Integer(dataForProductsAmount[i]));
 
-            testProductsList.put(product, dataForProductsAmount[i]);
+            testProductsList.add(product);
         }
     }
 }

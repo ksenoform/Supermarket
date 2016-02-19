@@ -36,6 +36,11 @@
             <td><form:input path="tax" id="tax"/></td>
             <td><form:errors path="tax" cssclass="error"/></td>
         </tr>
+        <tr>
+            <td><label for="items">items: </label></td>
+            <td><form:input path="items" id="items"/></td>
+            <td><form:errors path="items" cssclass="error"/></td>
+        </tr>
         </table>
 
         <input type="submit" value="Submit" name="Submit"/>

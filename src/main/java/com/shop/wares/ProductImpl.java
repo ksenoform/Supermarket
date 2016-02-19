@@ -27,6 +27,8 @@ public class ProductImpl implements Product{
     private BigDecimal netPrice;
     @Column(name = "TAX", nullable = false)
     private BigDecimal tax;
+    @Column(name = "ITEMS", nullable = false)
+    private Integer items;
 
     @Override
     public String getId() {
@@ -72,6 +74,16 @@ public class ProductImpl implements Product{
     }
 
     @Override
+    public void setItems(Integer items) {
+        this.items = items;
+    }
+
+    @Override
+    public Integer getItems() {
+        return items;
+    }
+
+    @Override
     public BigDecimal getTotalPrice() {
         BigDecimal totalPrice = netPrice.multiply(tax);
         totalPrice = totalPrice.add(netPrice);
@@ -93,6 +105,8 @@ public class ProductImpl implements Product{
         productData.append(tax);
         productData.append(", gross price: ");
         productData.append(getTotalPrice());
+        productData.append(", items: ");
+        productData.append(items);
 
         return  productData.toString();
     }

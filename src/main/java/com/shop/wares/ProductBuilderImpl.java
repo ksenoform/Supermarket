@@ -16,6 +16,7 @@ public class ProductBuilderImpl implements ProductBuilder {
                 new BigDecimal(0));
         product.setTax(
                 new BigDecimal(0));
+        product.setItems(0);
     }
 
     public ProductBuilder setId(String id) {
@@ -47,6 +48,12 @@ public class ProductBuilderImpl implements ProductBuilder {
 
     public ProductBuilder setTax(BigDecimal tax) {
         product.setTax(tax);
+        return this;
+    }
+
+    @Override
+    public ProductBuilder setItems(Integer items) {
+        product.setItems(items);
         return this;
     }
 
