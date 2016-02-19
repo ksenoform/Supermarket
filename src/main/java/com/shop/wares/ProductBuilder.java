@@ -12,5 +12,6 @@ public interface ProductBuilder {
     public ProductBuilder setNetPrice(BigDecimal price);
     public ProductBuilder setTax(String tax);
     public ProductBuilder setTax(BigDecimal tax);
+    public ProductBuilder setItems(Integer items);
     public Product build();
 }

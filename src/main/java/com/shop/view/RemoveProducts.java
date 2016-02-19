@@ -19,7 +19,7 @@ public class RemoveProducts implements Commands {
         Product product = prepareProductWithOnlyIdToSubtract();
         String amount = getAmountValue();
 
-        warehouse.subtractProductFromWarehouse(product, amount);
+        warehouse.subtractProductFromWarehouse(product, new Integer(amount));
     }
 
     private String getAmountValue() {

@@ -18,9 +18,8 @@ public class AddProducts implements Commands {
     @Override
     public void execute() {
         Product product = createProduct();
-        String amount = getAmountValue();
 
-        warehouse.addProductToWarehouse(product, amount);
+        warehouse.pubNewProductToWarehouse(product);
     }
 
     private Product createProduct() {
@@ -36,20 +35,17 @@ public class AddProducts implements Commands {
         System.out.println("Product tax: ");
         String productTax = ConsoleReader.readData();
 
+        System.out.println("Product tax: ");
+        String productItems = ConsoleReader.readData();
+
         Product product = new ProductBuilderImpl()
                 .setId(productId)
                 .setName(productName)
                 .setNetPrice(productNetPrice)
                 .setTax(productTax)
+                .setItems(new Integer(productItems))
                 .build();
 
         return product;
-    }
-
-    private String getAmountValue() {
-        System.out.println("Set quantity of the product: ");
-        String result = ConsoleReader.readData();
-
-        return result;
     }
 }

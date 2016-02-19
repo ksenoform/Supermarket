@@ -3,30 +3,28 @@ package com.shop.storage;
 import com.shop.wares.Product;
 import com.shop.wares.ProductBuilderImpl;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by RSzczygielski on 17.01.16.
  */
 public class WarehouseImpl implements Warehouse {
-    private Map<Product, Integer> productList = new HashMap<>();
+    private List<Product> productList = new ArrayList<>();
 
     @Override
-    public Map<Product, Integer> getAllProduct()
+    public List<Product> getAllProduct()
     {
         return productList.isEmpty()
-                ? Collections.EMPTY_MAP
+                ? Collections.EMPTY_LIST
                 : productList;
     }
 
     @Override
     public Product getProductByID(String id) {
-        for (Product product : productList.keySet()) {
-            String productId = product.getId();
+        for (Product product : productList) {
+            String currentId = product.getId();
 
-            if (productId.equals(id)) {
+            if (currentId.equals(id)) {
                 return product;
             }
         }
@@ -36,7 +34,7 @@ public class WarehouseImpl implements Warehouse {
 
     @Override
     public Product getProductByName(String name) {
-        for (Product product : productList.keySet()) {
+        for (Product product : productList) {
             String productName = product.getName();
 
             if (productName.equals(name)) {
@@ -48,52 +46,39 @@ public class WarehouseImpl implements Warehouse {
     }
 
     @Override
+    public void pubNewProductToWarehouse(Product product) {
+        productList.add(product);
+    }
+
+    @Override
     public void addProductToWarehouse(Product product, Integer amount) {
-        if (productList.containsKey(product)) {
-            amount += productList.get(product);
+        if (productList.contains(product)) {
+            Integer index = productList.indexOf(product);
+            amount += product.getItems();
+            product.setItems(amount);
+
+            productList.set(index, product);
         }
-
-        productList.put(product, amount);
-    }
-
-    @Override
-    public void addProductToWarehouse(Product product, String amount) {
-        Integer amountAsNumber = new Integer(amount);
-        addProductToWarehouse(product, amountAsNumber);
-    }
-
-    @Override
-    public void addProductToWarehouse(Product product) {
-        addProductToWarehouse(product, new Integer(0));
     }
 
     @Override
     public void subtractProductFromWarehouse(Product product, Integer amount) {
-        Integer oldAmount = productList.get(product);
-        Integer newAmount = oldAmount - amount;
+        if (productList.contains(product)) {
+            Integer index = productList.indexOf(product);
+            Integer oldAmount = product.getItems();
+            Integer newAmount = oldAmount - amount;
+            product.setItems(newAmount);
 
-        productList.put(product, newAmount);
-    }
-
-    @Override
-    public void subtractProductFromWarehouse(Product product, String amount) {
-        Integer amountAsNumber = new Integer(amount);
-        subtractProductFromWarehouse(product, amountAsNumber);
-    }
-
-    @Override
-    public void subtractProductFromWarehouse(Product product) {
-        subtractProductFromWarehouse(product, new Integer(1));
+            productList.set(index, product);
+        }
     }
 
     @Override
     public String toString() {
         StringBuilder dataWitchAmount = new StringBuilder();
 
-        for (Map.Entry<Product, Integer> productIntegerEntry : productList.entrySet()) {
-            dataWitchAmount.append(productIntegerEntry.getKey());
-            dataWitchAmount.append(", items in stock: ");
-            dataWitchAmount.append(productIntegerEntry.getValue());
+        for (Product product : productList) {
+            dataWitchAmount.append(product);
             dataWitchAmount.append("\n");
         }
 
