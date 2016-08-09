@@ -1,12 +1,11 @@
-package com.shop.wares;
+package com.shop.storage.implementations;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import com.shop.storage.interfaces.Product;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
 
 import static java.math.BigDecimal.ONE;
@@ -17,7 +16,7 @@ import static java.math.BigDecimal.ZERO;
  */
 @Entity
 @Table(name = "PRODUCTS")
-public class ProductImpl implements Product{
+public class ProductImpl implements Product {
     @Id
     @Column(name = "ID", nullable = false)
     private String id;

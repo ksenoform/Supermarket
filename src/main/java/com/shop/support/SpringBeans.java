@@ -1,9 +1,9 @@
 package com.shop.support;
 
-import com.shop.storage.Warehouse;
-import com.shop.storage.WarehouseImpl;
-import com.shop.wares.Product;
-import com.shop.wares.ProductBuilderImpl;
+import com.shop.storage.interfaces.Warehouse;
+import com.shop.storage.implementations.WarehouseImpl;
+import com.shop.storage.interfaces.Product;
+import com.shop.storage.implementations.ProductBuilderImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

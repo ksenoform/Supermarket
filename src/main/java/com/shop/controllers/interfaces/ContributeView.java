@@ -1,6 +1,6 @@
-package com.shop.controllers;
+package com.shop.controllers.interfaces;
 
-import com.shop.wares.ProductImpl;
+import com.shop.storage.implementations.ProductImpl;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;

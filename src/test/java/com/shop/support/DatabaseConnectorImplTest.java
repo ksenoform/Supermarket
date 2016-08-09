@@ -1,12 +1,10 @@
 package com.shop.support;
 
-import com.shop.wares.Product;
-import com.shop.wares.ProductBuilderImpl;
+import com.shop.storage.interfaces.Product;
+import com.shop.storage.implementations.ProductBuilderImpl;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.service.spi.InjectService;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -30,7 +28,7 @@ public class DatabaseConnectorImplTest {
     @Mock
     private Query query;
     @InjectMocks
-    private DatabaseConnector databaseConnector = new DatabaseConnectorImpl();;
+    private DatabaseConnector databaseConnector = new DatabaseConnectorImpl();
     private Product product = new ProductBuilderImpl().build();
     private List<Product> listOfProduct = new ArrayList<>(Arrays.asList(product));
 
@@ -40,9 +38,9 @@ public class DatabaseConnectorImplTest {
         Mockito.when(session.createQuery(Mockito.anyString())).thenReturn(query);
         Mockito.when(query.list()).thenReturn(listOfProduct);
 
-        Map<Product, Integer> result = databaseConnector.readFromDatabase();
+        List<Product> result = databaseConnector.readFromDatabase();
 
-        assertEquals(new Integer(1), result.get(product));
+        assertEquals(product, result.get(0));
     }
 
     @Test
@@ -51,9 +49,9 @@ public class DatabaseConnectorImplTest {
         Mockito.when(session.createQuery(Mockito.anyString())).thenReturn(query);
         Mockito.when(query.list()).thenReturn(Collections.emptyList());
 
-        Map<Product, Integer> result = databaseConnector.readFromDatabase();
+        List<Product> result = databaseConnector.readFromDatabase();
 
-        assertEquals(Collections.emptyMap(), result);
+        assertEquals(Collections.emptyList(), result);
     }
 
     @Test

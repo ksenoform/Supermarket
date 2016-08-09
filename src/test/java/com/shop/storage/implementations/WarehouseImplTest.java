@@ -1,8 +1,10 @@
-package com.shop.storage;
+package com.shop.storage.implementations;
 
-import com.shop.wares.Product;
-import com.shop.wares.ProductBuilderImpl;
-import com.shop.wares.ProductImpl;
+import com.shop.storage.implementations.WarehouseImpl;
+import com.shop.storage.interfaces.Warehouse;
+import com.shop.storage.interfaces.Product;
+import com.shop.storage.implementations.ProductBuilderImpl;
+import com.shop.storage.implementations.ProductImpl;
 import org.junit.Before;
 import org.junit.Test;
 

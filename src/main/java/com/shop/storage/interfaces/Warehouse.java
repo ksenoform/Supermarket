@@ -1,6 +1,4 @@
-package com.shop.storage;
-
-import com.shop.wares.Product;
+package com.shop.storage.interfaces;
 
 import java.util.List;
 

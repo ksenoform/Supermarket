@@ -1,4 +1,7 @@
-package com.shop.wares;
+package com.shop.storage.implementations;
+
+import com.shop.storage.interfaces.Product;
+import com.shop.storage.interfaces.ProductBuilder;
 
 import java.math.BigDecimal;
 

@@ -1,9 +1,7 @@
-package com.shop.controllers;
+package com.shop.controllers.implementations;
 
-import com.shop.storage.Warehouse;
+import com.shop.controllers.interfaces.Availability;
 import com.shop.support.DatabaseConnector;
-import com.shop.wares.Product;
-import com.shop.wares.ProductBuilderImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
