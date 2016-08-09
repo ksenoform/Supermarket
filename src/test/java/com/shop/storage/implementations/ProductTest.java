@@ -1,7 +1,7 @@
-package com.shop.wares;
+package com.shop.storage.implementations;
 
-import com.shop.wares.Product;
-import com.shop.wares.ProductImpl;
+import com.shop.storage.implementations.ProductImpl;
+import com.shop.storage.interfaces.Product;
 import org.junit.Test;
 
 import java.math.BigDecimal;

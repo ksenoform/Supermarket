@@ -1,9 +1,9 @@
 package com.shop.view;
 
-import com.shop.storage.Warehouse;
+import com.shop.storage.interfaces.Warehouse;
 import com.shop.support.ConsoleReader;
-import com.shop.wares.Product;
-import com.shop.wares.ProductBuilderImpl;
+import com.shop.storage.interfaces.Product;
+import com.shop.storage.implementations.ProductBuilderImpl;
 
 /**
  * Created by RSzczygielski on 2016-01-18.

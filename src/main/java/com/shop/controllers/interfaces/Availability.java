@@ -1,4 +1,4 @@
-package com.shop.controllers;
+package com.shop.controllers.interfaces;
 
 import org.springframework.ui.ModelMap;
 

@@ -1,4 +1,4 @@
-package com.shop.wares;
+package com.shop.storage.interfaces;
 
 import java.math.BigDecimal;
 

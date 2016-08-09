@@ -1,6 +1,6 @@
 package com.shop.support;
 
-import com.shop.wares.Product;
+import com.shop.storage.interfaces.Product;
 
 import java.util.List;
 

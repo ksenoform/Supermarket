@@ -1,6 +1,6 @@
 package com.shop.support;
 
-import com.shop.wares.ProductImpl;
+import com.shop.storage.implementations.ProductImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

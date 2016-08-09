@@ -1,9 +1,10 @@
-package com.shop.controllers;
+package com.shop.controllers.implementations;
 
+import com.shop.controllers.interfaces.ContributeView;
 import com.shop.support.DatabaseConnector;
 import com.shop.support.ProductValidator;
-import com.shop.wares.Product;
-import com.shop.wares.ProductImpl;
+import com.shop.storage.interfaces.Product;
+import com.shop.storage.implementations.ProductImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,8 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.validation.Valid;
 
 /**
  * Created by RSzczygielski on 2016-01-26.
