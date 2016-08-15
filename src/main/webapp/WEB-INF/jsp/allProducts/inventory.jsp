@@ -24,7 +24,7 @@
         <section class="container">
             <div class="row">
                 <c:forEach items="${products}" var="product">
-                    <h3>ID: ${product.id}</h3>
+                    <h3>ID: ${product.entityId}</h3>
                     <p>Name: ${product.name}</p>
                     <p>Net Price: ${product.netPrice}</p>
                     <p>Tax: ${product.tax}</p>

@@ -1,9 +1,10 @@
-package com.shop.support;
+package com.shop.dataacces;
 
+import com.shop.model.Product;
+import com.shop.storage.interfaces.ProductDAO;
 import com.shop.storage.interfaces.Warehouse;
-import com.shop.storage.implementations.WarehouseImpl;
-import com.shop.storage.interfaces.Product;
-import com.shop.storage.implementations.ProductBuilderImpl;
+import com.shop.storage.implementations.local.WarehouseImpl;
+import com.shop.storage.implementations.local.ProductBuilderImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

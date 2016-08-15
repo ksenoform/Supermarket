@@ -1,17 +1,19 @@
 package com.shop.storage.interfaces;
 
+import com.shop.model.Product;
+
 import java.math.BigDecimal;
 
 /**
  * Created by RSzczygielski on 17.01.16.
  */
 public interface ProductBuilder {
-    public ProductBuilder setId(String id);
-    public ProductBuilder setName(String name);
-    public ProductBuilder setNetPrice(String price);
-    public ProductBuilder setNetPrice(BigDecimal price);
-    public ProductBuilder setTax(String tax);
-    public ProductBuilder setTax(BigDecimal tax);
-    public ProductBuilder setItems(Integer items);
-    public Product build();
+    ProductBuilder setEntityId(Integer id);
+    ProductBuilder setName(String name);
+    ProductBuilder setNetPrice(String price);
+    ProductBuilder setNetPrice(BigDecimal price);
+    ProductBuilder setTax(String tax);
+    ProductBuilder setTax(BigDecimal tax);
+    ProductBuilder setItems(Integer items);
+    Product build();
 }

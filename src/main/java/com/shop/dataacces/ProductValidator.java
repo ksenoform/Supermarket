@@ -1,6 +1,7 @@
-package com.shop.support;
+package com.shop.dataacces;
 
-import com.shop.storage.implementations.ProductImpl;
+import com.shop.model.Product;
+import com.shop.storage.implementations.local.ProductDAOImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -14,18 +15,18 @@ import java.util.regex.Pattern;
  */
 @Component
 public class ProductValidator implements Validator{
-    private String patternId = "\\D{2}\\d+";
+    private String patternId = "\\d+";
 
     @Override
     public boolean supports(Class clazz) {
-        return ProductImpl.class.isAssignableFrom(clazz);
+        return ProductDAOImpl.class.isAssignableFrom(clazz);
     }
 
     @Override
     public void validate(Object o, Errors errors) {
-        ProductImpl product = (ProductImpl) o;
+        Product product = (Product) o;
 
-        if (isBadId(product.getId())) {
+        if (isBadId(product.getEntityId())) {
             errors.rejectValue("id", "valid.new.product.id");
         }
 
@@ -42,11 +43,8 @@ public class ProductValidator implements Validator{
         }
     }
 
-    private boolean isBadId(String id) {
-        Pattern pattern = Pattern.compile(patternId);
-        Matcher matcher = pattern.matcher(id);
-
-        return !matcher.matches();
+    private boolean isBadId(Integer id) {
+        return false;
     }
 
     private boolean idBadName(String name) {

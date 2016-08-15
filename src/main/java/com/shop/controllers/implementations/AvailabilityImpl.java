@@ -1,7 +1,7 @@
 package com.shop.controllers.implementations;
 
 import com.shop.controllers.interfaces.Availability;
-import com.shop.support.DatabaseConnector;
+import com.shop.dataacces.ProductAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,16 +15,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/allProducts")
 public class AvailabilityImpl implements Availability {
     @Autowired
-    private DatabaseConnector databaseConnector;
+    private ProductAccess productAccess;
 
     @Override
     @RequestMapping(value = "inventory", method = RequestMethod.GET)
     public String getRequestFromAllProductsButton(ModelMap modelMap) {
         String message = "<br><div style='text-align:center;'> All product in warehouse </div><br><br>";
 
-
         modelMap.addAttribute("showInventory", message);
-        modelMap.addAttribute("products", databaseConnector.readFromDatabase());
+        modelMap.addAttribute("products", productAccess.getListOfAllProduct());
 
         return "allProducts/inventory";
     }
