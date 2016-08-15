@@ -1,21 +1,21 @@
 package com.shop.storage.implementations;
 
-import com.shop.storage.implementations.ProductBuilderImpl;
-import com.shop.storage.interfaces.Product;
+import com.shop.model.Product;
+import com.shop.storage.implementations.local.ProductBuilderImpl;
 import org.junit.Test;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by RSzczygielski on 17.01.16.
  */
 public class ProductBuilderTest {
     private String defaultValueForIdAndName = "none";
-    private BigDecimal defaultValueForTax = BigDecimal.ONE;
+    private BigDecimal defaultValueForTax = BigDecimal.ZERO;
     private BigDecimal defaultValueForPrice = BigDecimal.ZERO;
-    private String testId = "A123";
+    private Integer testId = 0000;
     private String testName = "SomeName";
     private String testPriceString = "200";
     private BigDecimal testPriceBigdecimal = new BigDecimal(100);
@@ -33,7 +33,7 @@ public class ProductBuilderTest {
     @Test
     public void shouldReturnProductWithNewId() {
         testBuild = new ProductBuilderImpl()
-                .setId(testId)
+                .setEntityId(testId)
                 .build();
 
         assertTestOnlyForId(testBuild);
@@ -87,7 +87,7 @@ public class ProductBuilderTest {
     @Test
     public void shouldReturnProductWithAllNewFieldUsingBuilder() {
         testBuild = new ProductBuilderImpl()
-                .setId(testId)
+                .setEntityId(testId)
                 .setName(testName)
                 .setTax(testTaxBigdecimal)
                 .setNetPrice(testPriceString)
@@ -97,14 +97,12 @@ public class ProductBuilderTest {
     }
 
     private void assertTestForDefaultValue(Product product) {
-        assertEquals(defaultValueForIdAndName, product.getId());
         assertEquals(defaultValueForIdAndName, product.getName());
         assertEquals(defaultValueForPrice, product.getNetPrice());
         assertEquals(defaultValueForTax, product.getTax());
     }
 
     private void assertTestOnlyForId(Product product) {
-        assertEquals(testId, product.getId());
         assertEquals(defaultValueForIdAndName, product.getName());
         assertEquals(defaultValueForPrice, product.getNetPrice());
         assertEquals(defaultValueForTax, product.getTax());
@@ -112,14 +110,12 @@ public class ProductBuilderTest {
     }
 
     private void assertTestOnlyForName(Product product) {
-        assertEquals(defaultValueForIdAndName, product.getId());
         assertEquals(testName, product.getName());
         assertEquals(defaultValueForPrice, product.getNetPrice());
         assertEquals(defaultValueForTax, product.getTax());
     }
 
     private void assertTestOnlyForPriceAsString(Product product) {
-        assertEquals(defaultValueForIdAndName, product.getId());
         assertEquals(defaultValueForIdAndName, product.getName());
         assertEquals(
                 new BigDecimal(testPriceString), product.getNetPrice());
@@ -127,7 +123,6 @@ public class ProductBuilderTest {
     }
 
     private void assertTestOnlyForPriceAsBigdecimal(Product product) {
-        assertEquals(defaultValueForIdAndName, product.getId());
         assertEquals(defaultValueForIdAndName, product.getName());
         assertEquals(testPriceBigdecimal, product.getNetPrice());
         assertEquals(defaultValueForTax, product.getTax());
@@ -135,33 +130,30 @@ public class ProductBuilderTest {
 
     private void assertTestOnlyForTaxAsString(Product product) {
         BigDecimal percentOfTestedTax = new BigDecimal(testTaxString);
-        percentOfTestedTax = percentOfTestedTax.divide(
-                new BigDecimal(100));
+//        percentOfTestedTax = percentOfTestedTax.divide(
+//                new BigDecimal(100));
 
-        assertEquals(defaultValueForIdAndName, product.getId());
         assertEquals(defaultValueForIdAndName, product.getName());
         assertEquals(defaultValueForPrice, product.getNetPrice());
         assertEquals(percentOfTestedTax, product.getTax());
     }
 
     private void assertTestOnlyForTaxAsBigdecimal(Product product) {
-        BigDecimal percentOfTestedTax = testTaxBigdecimal.divide(
-                new BigDecimal(100));
+//        BigDecimal percentOfTestedTax = testTaxBigdecimal.divide(
+//                new BigDecimal(100));
 
-        assertEquals(defaultValueForIdAndName, product.getId());
         assertEquals(defaultValueForIdAndName, product.getName());
         assertEquals(defaultValueForPrice, product.getNetPrice());
-        assertEquals(percentOfTestedTax, product.getTax());
+        assertEquals(testTaxBigdecimal, product.getTax());
     }
 
     private void assertTestForAllNewDataUsingByBuilder(Product product) {
-        BigDecimal percentOfTestedTax = testTaxBigdecimal.divide(
-                new BigDecimal(100));
+//        BigDecimal percentOfTestedTax = testTaxBigdecimal.divide(
+//                new BigDecimal(100));
 
-        assertEquals(testId, product.getId());
         assertEquals(testName, product.getName());
         assertEquals(
                 new BigDecimal(testPriceString), product.getNetPrice());
-        assertEquals(percentOfTestedTax, product.getTax());
+        assertEquals(testTaxBigdecimal, product.getTax());
     }
 }

@@ -1,10 +1,11 @@
 package com.shop.controllers.implementations;
 
 import com.shop.controllers.interfaces.ContributeView;
-import com.shop.support.DatabaseConnector;
-import com.shop.support.ProductValidator;
-import com.shop.storage.interfaces.Product;
-import com.shop.storage.implementations.ProductImpl;
+import com.shop.model.Product;
+import com.shop.storage.implementations.local.ProductDAOImpl;
+import com.shop.storage.interfaces.ProductDAO;
+import com.shop.dataacces.ProductAccess;
+import com.shop.dataacces.ProductValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,32 +23,32 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("addProduct/")
 public class ContributeViewImpl implements ContributeView {
     @Autowired
-    private DatabaseConnector databaseConnector;
+    private ProductAccess productAccess;
     @Autowired
     private ProductValidator productValidator;
 
     @Override
     @RequestMapping(value = "inventory", method = RequestMethod.GET)
-     public ModelAndView showProductForm() {
-        return new ModelAndView("addProduct/contribute", "productForm", new ProductImpl());
+    public ModelAndView showProductForm() {
+        return new ModelAndView("addProduct/contribute", "productForm", new Product());
     }
 
     @Override
     @RequestMapping(value = "contribute",
             method = RequestMethod.POST,
             params = "Submit")
-    public String addProduct(@ModelAttribute("productForm") @Validated ProductImpl product,
+    public String addProduct(@ModelAttribute("productForm") @Validated Product product,
                              BindingResult bindingResult,
                              ModelMap modelMap) {
         productValidator.validate(product, bindingResult);
 
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() || product == null) {
             return "addProduct/contribute";
         }
 
-        databaseConnector.writeToDatabase(product);
+        productAccess.writeProductToBase(product);
         prepareViewWithAddingProduct(product, modelMap);
-        modelMap.addAttribute("productForm", new ProductImpl());
+        modelMap.addAttribute("productForm", new Product());
 
         return "addProduct/contribute";
     }
@@ -63,7 +64,7 @@ public class ContributeViewImpl implements ContributeView {
     private void prepareViewWithAddingProduct(Product product, ModelMap modelMap) {
         modelMap.addAttribute("product_id",
                 buildRowWithProductDisplayedOnPage("ID: ",
-                        product.getId()));
+                        product.getEntityId().toString()));
 
         modelMap.addAttribute("product_name",
                 buildRowWithProductDisplayedOnPage("Name: ",

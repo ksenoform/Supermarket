@@ -1,7 +1,7 @@
-package com.shop.support;
+package com.shop.dataacces;
 
-import com.shop.storage.interfaces.Product;
-import com.shop.storage.implementations.ProductBuilderImpl;
+import com.shop.model.Product;
+import com.shop.storage.implementations.local.ProductBuilderImpl;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -28,9 +28,9 @@ public class DatabaseConnectorImplTest {
     @Mock
     private Query query;
     @InjectMocks
-    private DatabaseConnector databaseConnector = new DatabaseConnectorImpl();
+    private ProductAccess databaseConnector = new ProductAccessImpl();
     private Product product = new ProductBuilderImpl().build();
-    private List<Product> listOfProduct = new ArrayList<>(Arrays.asList(product));
+    private List< Product> listOfProduct = new ArrayList<>(Arrays.asList(product));
 
     @Test
     public void shouldReturnMapWithProductAndAmount() throws Exception {
@@ -38,7 +38,7 @@ public class DatabaseConnectorImplTest {
         Mockito.when(session.createQuery(Mockito.anyString())).thenReturn(query);
         Mockito.when(query.list()).thenReturn(listOfProduct);
 
-        List<Product> result = databaseConnector.readFromDatabase();
+        List<Product> result = databaseConnector.getListOfAllProduct();
 
         assertEquals(product, result.get(0));
     }
@@ -49,18 +49,18 @@ public class DatabaseConnectorImplTest {
         Mockito.when(session.createQuery(Mockito.anyString())).thenReturn(query);
         Mockito.when(query.list()).thenReturn(Collections.emptyList());
 
-        List<Product> result = databaseConnector.readFromDatabase();
+        List<Product> result = databaseConnector.getListOfAllProduct();
 
         assertEquals(Collections.emptyList(), result);
     }
 
     @Test
     public void verifyIfMethodResponsibilityForWritingToDatabaseIsCold() {
-        DatabaseConnector databaseConnectorSpy = Mockito.spy(databaseConnector);
-        Mockito.doNothing().when(databaseConnectorSpy).writeToDatabase(product);
+        ProductAccess databaseConnectorSpy = Mockito.spy(databaseConnector);
+        Mockito.doNothing().when(databaseConnectorSpy).writeProductToBase(product);
 
-        databaseConnectorSpy.writeToDatabase(product);
+        databaseConnectorSpy.writeProductToBase(product);
 
-        Mockito.verify(databaseConnectorSpy, Mockito.atLeastOnce()).writeToDatabase(product);
+        Mockito.verify(databaseConnectorSpy, Mockito.atLeastOnce()).writeProductToBase(product);
     }
 }

@@ -18,8 +18,8 @@ import java.util.Properties;
  */
 @Configuration
 @EnableTransactionManagement
-@PropertySources(value = {@PropertySource("/WEB-INF/hibernate/persistence.properties")})
-@ComponentScan("com.shop")
+@PropertySources(value = {@PropertySource("classpath:persistance-h2.properties")})
+@ComponentScan({"com.shop.dataacces", "com.shop.main.config"})
 public class PersistanceBeansConfig {
     @Autowired
     private Environment env;
@@ -28,7 +28,7 @@ public class PersistanceBeansConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(restDataSource());
-        sessionFactory.setPackagesToScan(new String[] { "com.shop" });
+        sessionFactory.setPackagesToScan(new String[] { "com.shop.model" });
         sessionFactory.setHibernateProperties(hibernateProperties());
 
         return sessionFactory;

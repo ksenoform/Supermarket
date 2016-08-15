@@ -1,18 +1,17 @@
 package com.shop.storage.implementations;
 
-import com.shop.storage.implementations.ProductImpl;
-import com.shop.storage.interfaces.Product;
+import com.shop.model.Product;
 import org.junit.Test;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by RSzczygielski on 17.01.16.
  */
 public class ProductTest {
-    private Product productToTest = new ProductImpl();
+    private Product productToTest = new Product();
 
     @Test
     public void shouldReturn0For0AsPriceAndTax() {
@@ -32,7 +31,7 @@ public class ProductTest {
         productToTest.setTax(tax);
 
         for (int currentPrice = 1; currentPrice <= 10; currentPrice++) {
-            BigDecimal expectResult = (new BigDecimal("11.0"));
+            BigDecimal expectResult = new BigDecimal("11.0");
             expectResult = expectResult.multiply(
                     new BigDecimal(currentPrice));
 
