@@ -1,7 +1,8 @@
-package com.shop.dataacces;
+package com.shop.hibernate;
 
-import com.shop.model.Product;
-import com.shop.storage.implementations.local.ProductBuilderImpl;
+import com.shop.hibernate.interfaces.ProductDAO;
+import com.shop.domain.Product;
+import com.shop.service.local.ProductBuilderImpl;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -28,7 +29,7 @@ public class DatabaseConnectorImplTest {
     @Mock
     private Query query;
     @InjectMocks
-    private ProductAccess databaseConnector = new ProductAccessImpl();
+    private ProductDAO databaseConnector = new ProductDAOImpl();
     private Product product = new ProductBuilderImpl().build();
     private List< Product> listOfProduct = new ArrayList<>(Arrays.asList(product));
 
@@ -56,7 +57,7 @@ public class DatabaseConnectorImplTest {
 
     @Test
     public void verifyIfMethodResponsibilityForWritingToDatabaseIsCold() {
-        ProductAccess databaseConnectorSpy = Mockito.spy(databaseConnector);
+        ProductDAO databaseConnectorSpy = Mockito.spy(databaseConnector);
         Mockito.doNothing().when(databaseConnectorSpy).writeProductToBase(product);
 
         databaseConnectorSpy.writeProductToBase(product);

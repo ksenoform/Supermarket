@@ -1,6 +1,6 @@
-package com.shop.storage.implementations;
+package com.shop.service.implementations;
 
-import com.shop.model.Product;
+import com.shop.domain.Product;
 import org.junit.Test;
 
 import java.math.BigDecimal;

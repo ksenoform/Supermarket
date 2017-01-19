@@ -14,12 +14,12 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 /**
- * Created by RSzczygielski on 02.02.16.
+ * Created by Robert Szczygielski on 02.02.16.
  */
 @Configuration
 @EnableTransactionManagement
 @PropertySources(value = {@PropertySource("classpath:persistance-h2.properties")})
-@ComponentScan({"com.shop.dataacces", "com.shop.main.config"})
+@ComponentScan({"com.shop.hibernate", "com.shop.main.config", "com.shop.controller", "com.shop.service.local"})
 public class PersistanceBeansConfig {
     @Autowired
     private Environment env;
@@ -28,7 +28,7 @@ public class PersistanceBeansConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(restDataSource());
-        sessionFactory.setPackagesToScan(new String[] { "com.shop.model" });
+        sessionFactory.setPackagesToScan("com.shop.domain");
         sessionFactory.setHibernateProperties(hibernateProperties());
 
         return sessionFactory;

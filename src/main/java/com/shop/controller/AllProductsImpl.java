@@ -1,7 +1,7 @@
-package com.shop.controllers.implementations;
+package com.shop.controller;
 
-import com.shop.controllers.interfaces.Availability;
-import com.shop.dataacces.ProductAccess;
+import com.shop.controller.interfaces.AllProducts;
+import com.shop.service.interfaces.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Created by RSzczygielski on 2016-01-28.
+ * Created by Robert Szczygielski on 2016-01-28.
  */
 @Controller
 @RequestMapping("/allProducts")
-public class AvailabilityImpl implements Availability {
+public class AllProductsImpl implements AllProducts {
     @Autowired
-    private ProductAccess productAccess;
+    private ProductService productService;
 
     @Override
     @RequestMapping(value = "inventory", method = RequestMethod.GET)
@@ -23,7 +23,7 @@ public class AvailabilityImpl implements Availability {
         String message = "<br><div style='text-align:center;'> All product in warehouse </div><br><br>";
 
         modelMap.addAttribute("showInventory", message);
-        modelMap.addAttribute("products", productAccess.getListOfAllProduct());
+        modelMap.addAttribute("products", productService.getListOfAllProduct());
 
         return "allProducts/inventory";
     }

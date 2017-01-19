@@ -1,34 +1,31 @@
-package com.shop.dataacces;
+package com.shop.controller.validators;
 
-import com.shop.model.Product;
-import com.shop.storage.implementations.local.ProductDAOImpl;
+import com.shop.domain.Product;
+import com.shop.service.local.ProductServiceImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import java.math.BigDecimal;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
- * Created by RSzczygielski on 10.02.16.
+ * Created by Robert Szczygielski on 10.02.16.
  */
 @Component
 public class ProductValidator implements Validator{
-    private String patternId = "\\d+";
 
     @Override
     public boolean supports(Class clazz) {
-        return ProductDAOImpl.class.isAssignableFrom(clazz);
+        return ProductServiceImpl.class.isAssignableFrom(clazz);
     }
 
     @Override
     public void validate(Object o, Errors errors) {
         Product product = (Product) o;
 
-        if (isBadId(product.getEntityId())) {
-            errors.rejectValue("id", "valid.new.product.id");
-        }
+//        if (isBadId(product.getId())) {
+//            errors.rejectValue("id", "valid.new.product.id");
+//        }
 
         if (idBadName(product.getName())) {
             errors.rejectValue("name", "valid.new.product.name");
@@ -44,7 +41,7 @@ public class ProductValidator implements Validator{
     }
 
     private boolean isBadId(Integer id) {
-        return false;
+        return !(id == null);
     }
 
     private boolean idBadName(String name) {
@@ -52,14 +49,10 @@ public class ProductValidator implements Validator{
     }
 
     private boolean idBadNetPrice(BigDecimal netPrice) {
-        return (netPrice == null || netPrice.compareTo(BigDecimal.ZERO) == 1)
-                ? false
-                : true;
+        return !(netPrice == null || netPrice.compareTo(BigDecimal.ZERO) == 1);
     }
 
     private boolean idBadNetTax(BigDecimal tax) {
-        return (tax == null || tax.compareTo(BigDecimal.ZERO) == 1)
-                ? false
-                : true;
+        return !(tax == null || tax.compareTo(BigDecimal.ZERO) == 1);
     }
 }

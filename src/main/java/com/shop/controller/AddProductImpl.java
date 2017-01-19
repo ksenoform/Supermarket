@@ -1,11 +1,9 @@
-package com.shop.controllers.implementations;
+package com.shop.controller;
 
-import com.shop.controllers.interfaces.ContributeView;
-import com.shop.model.Product;
-import com.shop.storage.implementations.local.ProductDAOImpl;
-import com.shop.storage.interfaces.ProductDAO;
-import com.shop.dataacces.ProductAccess;
-import com.shop.dataacces.ProductValidator;
+import com.shop.controller.interfaces.AddProduct;
+import com.shop.controller.validators.ProductValidator;
+import com.shop.domain.Product;
+import com.shop.service.interfaces.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,19 +15,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Created by RSzczygielski on 2016-01-26.
+ * Created by Robert Szczygielski on 2016-01-26.
  */
 @Controller
 @RequestMapping("addProduct/")
-public class ContributeViewImpl implements ContributeView {
+public class AddProductImpl implements AddProduct {
     @Autowired
-    private ProductAccess productAccess;
+    private ProductService productService;
     @Autowired
     private ProductValidator productValidator;
 
     @Override
-    @RequestMapping(value = "inventory", method = RequestMethod.GET)
-    public ModelAndView showProductForm() {
+    @RequestMapping(value = "contribute", method = RequestMethod.GET)
+    public ModelAndView showForm() {
         return new ModelAndView("addProduct/contribute", "productForm", new Product());
     }
 
@@ -37,16 +35,16 @@ public class ContributeViewImpl implements ContributeView {
     @RequestMapping(value = "contribute",
             method = RequestMethod.POST,
             params = "Submit")
-    public String addProduct(@ModelAttribute("productForm") @Validated Product product,
-                             BindingResult bindingResult,
-                             ModelMap modelMap) {
+    public String saveInDataBase(@ModelAttribute("productForm") @Validated Product product,
+                                 BindingResult bindingResult,
+                                 ModelMap modelMap) {
         productValidator.validate(product, bindingResult);
 
         if (bindingResult.hasErrors() || product == null) {
             return "addProduct/contribute";
         }
 
-        productAccess.writeProductToBase(product);
+        productService.writeProductToBase(product);
         prepareViewWithAddingProduct(product, modelMap);
         modelMap.addAttribute("productForm", new Product());
 
@@ -64,7 +62,7 @@ public class ContributeViewImpl implements ContributeView {
     private void prepareViewWithAddingProduct(Product product, ModelMap modelMap) {
         modelMap.addAttribute("product_id",
                 buildRowWithProductDisplayedOnPage("ID: ",
-                        product.getEntityId().toString()));
+                        product.getId().toString()));
 
         modelMap.addAttribute("product_name",
                 buildRowWithProductDisplayedOnPage("Name: ",
@@ -88,13 +86,10 @@ public class ContributeViewImpl implements ContributeView {
         String middle = "</h4></td><td>";
         String suffix = "</td></tr>";
 
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(prefix);
-        stringBuilder.append(name);
-        stringBuilder.append(middle);
-        stringBuilder.append(dataToDisplay);
-        stringBuilder.append(suffix);
-
-        return stringBuilder.toString();
+        return prefix +
+                name +
+                middle +
+                dataToDisplay +
+                suffix;
     }
 }
