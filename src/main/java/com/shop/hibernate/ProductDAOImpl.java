@@ -1,6 +1,7 @@
-package com.shop.dataacces;
+package com.shop.hibernate;
 
-import com.shop.model.Product;
+import com.shop.hibernate.interfaces.ProductDAO;
+import com.shop.domain.Product;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,15 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * Created by RSzczygielski on 03.02.16.
+ * Created by Robert Szczygielski on 03.02.16.
  */
 @Repository("databaseConnector")
 @Transactional
-public class ProductAccessImpl implements ProductAccess {
+public class ProductDAOImpl implements ProductDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
-    protected Session getSession() {
+    private Session getSession() {
         return sessionFactory.getCurrentSession();
     }
 
@@ -29,7 +30,7 @@ public class ProductAccessImpl implements ProductAccess {
     }
 
     @Override
-    public List<Product> getListOfAllProduct() {
+    public List getListOfAllProduct() {
         String query = "FROM Product";
         return getSession().createQuery(query)
                             .list();

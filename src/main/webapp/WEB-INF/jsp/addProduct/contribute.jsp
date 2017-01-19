@@ -17,11 +17,6 @@
         <form:form method="POST" commandName="productForm" action="../addProduct/contribute">
         <table>
         <tr>
-            <td><label for="entityId">Id: </label></td>
-            <td><form:input path="entityId" id="entityId"/></td>
-            <td><form:errors path="entityId" cssclass="error"/></td>
-        </tr>
-        <tr>
             <td><label for="code">Kod: </label></td>
             <td><form:input path="code" id="code"/></td>
             <td><form:errors path="code" cssclass="error"/></td>

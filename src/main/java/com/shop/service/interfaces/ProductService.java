@@ -1,14 +1,16 @@
-package com.shop.storage.interfaces;
+package com.shop.service.interfaces;
 
-import com.shop.model.Product;
+import com.shop.domain.Product;
 
 import java.util.List;
 
 /**
- * Created by RSzczygielski on 17.01.16.
+ * Created by Robert Szczygielski on 17.01.16.
  */
-public interface Warehouse {
-    List<Product> getAllProduct();
+public interface ProductService {
+    List getListOfAllProduct();
+    void writeProductToBase(Product product);
+    List getAllProduct();
     Product getProductByID(Integer id);
     Product getProductByName(String name);
     void putNewProductToWarehouse(Product product);

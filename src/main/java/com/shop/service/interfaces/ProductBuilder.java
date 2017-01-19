@@ -1,11 +1,11 @@
-package com.shop.storage.interfaces;
+package com.shop.service.interfaces;
 
-import com.shop.model.Product;
+import com.shop.domain.Product;
 
 import java.math.BigDecimal;
 
 /**
- * Created by RSzczygielski on 17.01.16.
+ * Created by Robert Szczygielski on 17.01.16.
  */
 public interface ProductBuilder {
     ProductBuilder setEntityId(Integer id);

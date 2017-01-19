@@ -1,14 +1,12 @@
-package com.shop.controllers;
+package com.shop.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Created by RSzczygielski on 2016-01-25.
+ * Created by Robert Szczygielski on 2016-01-25.
  */
 @Controller
 @RequestMapping("/")
@@ -21,12 +19,12 @@ public class MainViewController {
     }
 
     @RequestMapping(method = RequestMethod.POST, params = "AllProducts")
-    public String getRequestFromAllProductsButtom() {
+    public String getRequestFromAllProductsButton() {
         return "redirect:/allProducts/inventory";
     }
 
     @RequestMapping(method = RequestMethod.POST, params = "AddProducts")
-    public String getRequestFromAddProductsButtom() {
-        return "redirect:/addProduct/inventory";
+    public String getRequestFromAddProductsButton() {
+        return "redirect:/addProduct/contribute";
     }
 }

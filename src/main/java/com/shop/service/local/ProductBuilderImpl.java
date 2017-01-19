@@ -1,20 +1,19 @@
-package com.shop.storage.implementations.local;
+package com.shop.service.local;
 
-import com.shop.model.Product;
-import com.shop.storage.interfaces.ProductDAO;
-import com.shop.storage.interfaces.ProductBuilder;
+import com.shop.domain.Product;
+import com.shop.service.interfaces.ProductBuilder;
 
 import java.math.BigDecimal;
 
 /**
- * Created by RSzczygielski on 17.01.16.
+ * Created by Robert Szczygielski on 17.01.16.
  */
 public class ProductBuilderImpl implements ProductBuilder {
     private Product product;
 
     public ProductBuilderImpl() {
         product = new Product();
-        product.setEntityId(0000);
+        product.setId(0);
         product.setName("none");
         product.setNetPrice(
                 new BigDecimal(0));
@@ -24,7 +23,7 @@ public class ProductBuilderImpl implements ProductBuilder {
     }
 
     public ProductBuilder setEntityId(Integer id) {
-        product.setEntityId(id);
+        product.setId(id);
         return this;
     }
 
