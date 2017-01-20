@@ -8,7 +8,6 @@ import java.util.List;
  * Created by Robert Szczygielski on 17.01.16.
  */
 public interface ProductService {
-    List getListOfAllProduct();
     void writeProductToBase(Product product);
     List getAllProduct();
     Product getProductByID(Integer id);

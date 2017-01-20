@@ -16,8 +16,12 @@ import org.springframework.web.servlet.view.JstlView;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan({"com.shop.hibernate", "com.shop.main.config", "com.shop.controller"})
-public class SpringConfiguration extends WebMvcConfigurerAdapter{
+@ComponentScan({
+    "com.shop.hibernate",
+    "com.shop.main.config",
+    "com.shop.controller"
+})
+public class WebAppContext extends WebMvcConfigurerAdapter{
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver resourceViewResolver = new InternalResourceViewResolver();

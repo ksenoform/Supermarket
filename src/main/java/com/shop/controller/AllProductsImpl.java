@@ -23,7 +23,7 @@ public class AllProductsImpl implements AllProducts {
         String message = "<br><div style='text-align:center;'> All product in warehouse </div><br><br>";
 
         modelMap.addAttribute("showInventory", message);
-        modelMap.addAttribute("products", productService.getListOfAllProduct());
+        modelMap.addAttribute("products", productService.getAllProduct());
 
         return "allProducts/inventory";
     }
