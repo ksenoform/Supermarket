@@ -8,7 +8,6 @@ import java.math.BigDecimal;
  * Created by Robert Szczygielski on 17.01.16.
  */
 public interface ProductBuilder {
-    ProductBuilder setEntityId(Integer id);
     ProductBuilder setName(String name);
     ProductBuilder setNetPrice(String price);
     ProductBuilder setNetPrice(BigDecimal price);

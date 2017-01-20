@@ -22,11 +22,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List getListOfAllProduct() {
-        return productDAO.getListOfAllProduct();
-    }
-
-    @Override
     public void writeProductToBase(Product product) {
         productDAO.writeProductToBase(product);
     }

@@ -17,7 +17,7 @@ public abstract class AbstractBaseEntity implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "ID", nullable = false)
-    private Integer id;
+    private Long id;
     @Column(name = "NAME", nullable = false)
     private String name;
     @Column(name = "CODE", nullable = false)
@@ -28,18 +28,13 @@ public abstract class AbstractBaseEntity implements Serializable {
     public AbstractBaseEntity() {
     }
 
-    public AbstractBaseEntity(Integer id, String name, String code) {
-        this.id = id;
+    public AbstractBaseEntity(String name, String code) {
         this.name = name;
         this.code = code;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {

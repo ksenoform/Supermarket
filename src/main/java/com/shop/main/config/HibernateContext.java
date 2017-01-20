@@ -19,8 +19,11 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @PropertySources(value = {@PropertySource("classpath:persistance-h2.properties")})
-@ComponentScan({"com.shop.hibernate", "com.shop.main.config", "com.shop.controller", "com.shop.service.local"})
-public class PersistanceBeansConfig {
+@ComponentScan({
+    "com.shop.hibernate",
+    "com.shop.service.local"
+})
+public class HibernateContext {
     @Autowired
     private Environment env;
 

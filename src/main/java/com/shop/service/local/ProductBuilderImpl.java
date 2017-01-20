@@ -13,18 +13,12 @@ public class ProductBuilderImpl implements ProductBuilder {
 
     public ProductBuilderImpl() {
         product = new Product();
-        product.setId(0);
         product.setName("none");
         product.setNetPrice(
                 new BigDecimal(0));
         product.setTax(
                 new BigDecimal(0));
         product.setItems(0);
-    }
-
-    public ProductBuilder setEntityId(Integer id) {
-        product.setId(id);
-        return this;
     }
 
     public ProductBuilder setName(String name) {

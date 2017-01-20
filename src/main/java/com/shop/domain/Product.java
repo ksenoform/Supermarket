@@ -22,8 +22,8 @@ public class Product extends AbstractBaseEntity {
 
     public Product() {}
 
-    public Product(Integer id, String name, String code, BigDecimal netPrice, BigDecimal tax, Integer items) {
-        super(id, name, code);
+    public Product(String name, String code, BigDecimal netPrice, BigDecimal tax, Integer items) {
+        super(name, code);
         this.netPrice = netPrice;
         this.tax = tax;
         this.items = items;
